@@ -58,76 +58,26 @@ HTTP POST, http://localhost/products/{    <br>
  -delete() <br>
 ======================================================================================== <br>
 <br>
-## [REST - 실제 코드 적용 예제 1] <br>
-### SpringBoot 실행 방법 <br>
-1. springboot4-REST(프로젝트 명) 의 Springboot4RestApplication.java 을 실행 <br>
-   (* run on server가 아니라 java application으로 실행) <br>
+## RESTful API
+: RESTful API (Respresentational State Transfer) HTTP 리퀘스트를 이용해 데이터를 GET, POST, PUT, DELETE 할 수 있도록 하는 API를 의미한다.  GET, POST, PUT, DELETE를 리퀘스트 메서드라고 부른다. 예를 들어서, HTTP 리퀘스트를 보낼 때, 얘는 GET메서드에요, 얘는 POST메서드에요 하고 메서드를 포함시켜서 리퀘스트를 보내면 서버 어플리케이션이 이를 인지하고 해석 할 수 있어야 한다. <br>
 <br>
-2. springboot4-REST(프로젝트 명) 의 Springboot4RestApplication.java 을 실행한 후, 브라우저에서 application.properties에 지정한 port 8888로 실행시키낟. localhost:7777 <br>
+* GET - 데이터를 가져온다. <br>
+* POST - 데이터를 생성하거나 업데이트한다. <br>
+* PUT - 데이터를 업데이트한다. <br>
+* DELETE - 데이터를 삭제한다. <br>
 <br>
+- 4가지 오퍼레이션 중, GET API를 구현하는데 중점!! <br>
+- 구체적인 목표는 브라우저에 http://localhost:8080/todo/{id}/ 를 치고 들어가면 다음과 같은 JSON 오브젝트를 리턴하는 GET API 를 만드는 것!! <br>
+
+<img src="./img/restapi_example.PNG" width = 20%><br>**RestAPI_example**</img> <br>
 <br>
-
-### /pom.xml <br>
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>org.kosta</groupId>
-	<artifactId>springboot4-REST</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>springboot4-REST</name>
-	<description>Demo project for Spring Boot</description>
-
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis.spring.boot</groupId>
-			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>2.1.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
-	
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
-</project>
+<img src="./img/web_application_design.PNG" width = 20%><br>**web_application_design**</img> <br>
+<br>
+오늘 구현 할 부분은 3 -tier 아키텍쳐 중에서 중간에 있는 어플리케이션 서버이다. <br>
+어플리케이션 가장 먼저 구현 하는 이유는 <br>
+1) 비즈니스 로직이 있는 가장 핵심적인 부분이고, <br>
+2) 다른 티어들에 독립적으로 구현 할 수 있는 부분이기 때문이다. <br>
+<br>
+### 어플리케이션 서버 내부에 어떤 자바 클래스들이 있어야 하는지 알아보자. <br>
+<br>
+<img src="./img/web_application_java_class.PNG" width = 20%><br>**web_application_java_class**</img> <br>
