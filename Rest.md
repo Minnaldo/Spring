@@ -81,3 +81,13 @@ HTTP POST, http://localhost/products/{    <br>
 ### 어플리케이션 서버 내부에 어떤 자바 클래스들이 있어야 하는지 알아보자. <br>
 <br>
 <img src="./img/web_application_java_class.PNG" width = 20%><br>**web_application_java_class**</img> <br>
+<br>
+어플리케이션 서버를 확대해보자. 실제로는 이 서버 안팎으로 톰캣+스프링과 관련한 여러가지 일들이 일어나지만, 지금 우리가 관심을 가져야 할 부분은 우리의 코드 부분 뿐이다. 어플리케이션 내부의 자바 클래스들은 크게 두 가지 부류로 나뉜다. <br>
+* 데이터 클래스 - request, response, model 이 데이터 클래스에 해당한다. 데이터 클래스는 아무 기능도 하지 안흔ㄴ 말 그대로 데이터 그 자체라고 생각하면 된다. <br>
+* 데이터처리 클래스 - 데이터처리는 controller, service, jpa repository 등을 포함한다. 데이터 클래스를 가지고 이것 저것 바꾸고, 더하고, 빼고 디비에 넣는 등 다양한 작업을 한다. <br>
+<br>
+<br>
+<img src="./img/web_application_project.PNG" width = 20%><br>**web_application_project**</img> <br>
+<br>
+이제 프로젝트 구현 Let's get it! <br>
+<br>
